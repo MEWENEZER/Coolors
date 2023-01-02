@@ -8,11 +8,12 @@
 
 .main {
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(5, 1fr);
 
   font-family: 'Montserrat', sans-serif;
 
   height: 100vh;
+  color: #fff;
 }
 
 .col {
