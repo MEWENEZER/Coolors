@@ -20,22 +20,21 @@
   align-items: center;
 }
 
-button {
-  border: 1px solid grey;
-  border-radius: 15px;
-  background-color: transparent;
+.title:hover, button:hover {
   cursor: pointer;
-  padding: 5px 10px;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.15);
 }
-button:hover {
-  background-color: red;
+
+button {
+  border: none;
+  background-color: transparent;
+  padding: 10px 15px;
+  outline: none;
 }
 
 .title {
   padding: 5px 10px;
-}
-.title:hover {
-  background-color: red;
 }
 
 /*# sourceMappingURL=style.css.map */
