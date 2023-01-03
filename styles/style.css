@@ -27,5 +27,15 @@ button {
   cursor: pointer;
   padding: 5px 10px;
 }
+button:hover {
+  background-color: red;
+}
+
+.title {
+  padding: 5px 10px;
+}
+.title:hover {
+  background-color: red;
+}
 
 /*# sourceMappingURL=style.css.map */
