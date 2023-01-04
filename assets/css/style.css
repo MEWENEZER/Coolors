@@ -37,4 +37,11 @@ button {
   padding: 5px 10px;
 }
 
+.fa-lock {
+  transform: scale(1.15);
+}
+.fa-lock-open {
+  filter: opacity(0.5);
+}
+
 /*# sourceMappingURL=style.css.map */
