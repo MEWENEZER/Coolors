@@ -10,21 +10,36 @@ let cols = document.querySelectorAll('.col');
 //   return '#' + color;
 // }
 
-function setRandomColor() {
-  cols.forEach((col) => {
+function setRandomColor(isInitial) {
+  const colorArray = isInitial ? getColorsFromHash() : []; // Первичная загрузка ? Да : Нет
+
+  cols.forEach((col, index) => {
     const isLocked = col.querySelector('i');
     const title = col.querySelector('.title');
     const button = col.querySelector('.button');
-    const color = chroma.random();
+
+    const color = isInitial
+      ? colorArray[index]
+        ? colorArray[index]
+        : chroma.random()
+      : chroma.random();
 
     if (isLocked.classList.contains('fa-lock-open')) {
       col.style.background = color;
       title.textContent = color;
 
+      if (!isInitial) {
+        colorArray.push(color);
+      }
+
       setTextColor(title, color);
       setTextColor(button, color);
+    } else {
+      colorArray.push(title.textContent);
     }
   });
+
+  updateColorsHash(colorArray);
 }
 
 function setTextColor(element, color) {
@@ -32,7 +47,27 @@ function setTextColor(element, color) {
   element.style.color = luminance > 0.5 ? 'black' : 'white';
 }
 
-setRandomColor();
+function copyColor(text) {
+  return navigator.clipboard.writeText(text);
+}
+
+function updateColorsHash(colorArray) {
+  document.location.hash = colorArray
+    .map((cur) => cur.toString().substring(1))
+    .join('-');
+}
+
+function getColorsFromHash() {
+  if (document.location.hash.length > 1) {
+    return document.location.hash
+      .substring(1)
+      .split('-')
+      .map((cur) => '#' + cur);
+  }
+  return [];
+}
+
+setRandomColor(true);
 
 // Обработчик клика на 'Пробел'
 document.addEventListener('keydown', (event) => {
@@ -43,7 +78,7 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-// Обработчик клика на 'Замок'
+// Обработчик клика на 'Замок' и 'Заголовок'
 document.addEventListener('click', (event) => {
   const type = event.target.dataset.type;
 
@@ -55,5 +90,9 @@ document.addEventListener('click', (event) => {
 
     node.classList.toggle('fa-lock-open');
     node.classList.toggle('fa-lock');
+  } else if (type == 'copy') {
+    const hexCode = event.target.textContent;
+
+    copyColor(hexCode);
   }
 });
