@@ -47,3 +47,10 @@ button {
 
   @extend %hoverEffect;
 }
+
+.fa-lock {
+  &-open {
+    filter: opacity(0.5);
+  }
+  transform: scale(1.15);
+}
