@@ -1,4 +1,5 @@
 let cols = document.querySelectorAll('.col');
+
 // function getRandomNumber() {
 //   let hexCodes = '0123456789ABCDEF';
 //   let color = '';
@@ -15,8 +16,8 @@ function setRandomColor(isInitial) {
 
   cols.forEach((col, index) => {
     const isLocked = col.querySelector('i');
-    const title = col.querySelector('.title');
-    const button = col.querySelector('.button');
+    const title = col.querySelector('div > button:first-child');
+    const button = col.querySelector('div > button:last-child');
 
     const color = isInitial
       ? colorArray[index]
@@ -44,7 +45,16 @@ function setRandomColor(isInitial) {
 
 function setTextColor(element, color) {
   const luminance = chroma(color).luminance();
-  element.style.color = luminance > 0.5 ? 'black' : 'white';
+
+  if (luminance > 0.5) {
+    element.classList.remove('btn-outline-light');
+    element.classList.add('btn-outline-dark');
+  } else {
+    element.classList.remove('btn-outline-dark');
+    element.classList.add('btn-outline-light');
+  }
+
+  // element.style.color = luminance > 0.5 ? 'black' : 'white';
 }
 
 function copyColor(text) {
@@ -76,6 +86,9 @@ document.addEventListener('keydown', (event) => {
   if (event.code == 'Space') {
     setRandomColor();
   }
+
+  // Снятия фокуса при клике на 'Пробел'
+  event.target.blur();
 });
 
 // Обработчик клика на 'Замок' и 'Заголовок'
