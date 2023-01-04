@@ -1,4 +1,4 @@
-# Color-Picker
+# Coolors
 
 ![favicon](https://user-images.githubusercontent.com/107776990/210467452-6d76187e-a1bd-4371-bcb3-81998b8501f2.svg)
 
